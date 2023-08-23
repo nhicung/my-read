@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 const useStyles = styled((theme, props) => ({
     container: {
@@ -33,7 +34,6 @@ const useStyles = styled((theme, props) => ({
         // margin:'auto'
         margin: 'auto',
         paddingBottom: 'auto',
-        margin: '-15px',
     },
     project: {
         color: '#8E3200',
@@ -45,7 +45,7 @@ const useStyles = styled((theme, props) => ({
         textAlign: 'center',
     },
     names: {
-        fontSize: '44px',
+        fontSize: '28px',
         fontFamily: 'Roboto Slab',
         margin: 0,
         textAlign: 'center',
@@ -101,34 +101,50 @@ export default function Project(props) {
 
     return (
         <div>
-            <Container
-                className={classes.container}
-                // style={{ backgroundImage: props.project.bgimage }}
-            >
-                <Grid container spacing={6} className={classes.set}>
+            <Container maxWidth="md" sx={{ mt: 10, border: 1, p: 4, borderRadius: 2, }}>
+                <Grid container sx={{alignItems:'center' }}>
+                    <Grid
+                        item
+                        xs={12}
+                        md={5}
+                        direction='column'
+                        className={classes.imgWrap}
+                    >
+                        <img
+                            width='180px'
+                            className={classes.pic}
+                            src={props.project.img}
+                            alt={props.project.name}
+                        />
+                    </Grid>
                     <Grid
                         item
                         xs={12}
                         md={7}
                         direction='column'
                         className={classes.project}
+                        sx={{ color: '#8E3200', }}
                         align='center'
                     >
-                        <h2 className={classes.names}>
+                        <Typography variant='h3' sx={{ fontSize: 28 }} align='left'>
                             {' '}
                             {props.project.name}
-                        </h2>
-                        <h3 className={classes.tools} id={props.project.id}>
+                        </Typography>
+                        <Typography variant='h4' sx={{ fontSize: 20 }} id={props.project.id} align='left'>
                             {' '}
-                            {props.project.tool}
-                        </h3>
-                        <p className={classes.descripts}>
+                            {props.project.author}
+                        </Typography>
+                        <Typography className={classes.descripts} align='left'>
+                            {' '}
+                            <b>Total Episodes: {props.project.episodes}</b>
+                        </Typography>
+                        <Typography className={classes.descripts} align='left'>
                             {' '}
                             {props.project.description}
-                        </p>
+                        </Typography>
                         <Grid container center>
                             {props.project.webURL != null ? (
-                                <Grid item xs>
+                                // <Grid item xs>
                                     <Button
                                         color='secondary'
                                         className={classes.button}
@@ -140,10 +156,10 @@ export default function Project(props) {
                                         {' '}
                                         button
                                     </Button>
-                                </Grid>
+                                // </Grid>
                             ) : null}
                             {props.project.gitURL != null ? (
-                                <Grid item xs>
+                                // <Grid item xs>
                                     <Button
                                         color='secondary'
                                         className={classes.button}
@@ -155,40 +171,9 @@ export default function Project(props) {
                                         {' '}
                                         button
                                     </Button>
-                                </Grid>
+                                // </Grid>
                             ) : null}
                         </Grid>
-                    </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        md={5}
-                        direction='column'
-                        className={classes.imgWrap}
-                    >
-                        {props.project.imgHover != null ? (
-                            <img
-                                style={{ height: props.project.height }}
-                                className={classes.pic}
-                                src={props.project.img}
-                                onMouseOver={(e) =>
-                                    (e.currentTarget.src =
-                                        props.project.imgHover)
-                                }
-                                onMouseOut={(e) =>
-                                    (e.currentTarget.src =
-                                        props.project.img)
-                                }
-                                alt={props.project.name}
-                            />
-                        ) : (
-                            <img
-                                style={{ maxHeight: props.project.height }}
-                                className={classes.pic}
-                                src={props.project.img}
-                                alt={props.project.name}
-                            />
-                        )}
                     </Grid>
                 </Grid>
             </Container>
